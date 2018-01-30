@@ -108,7 +108,7 @@ function createChain(res){
 	    var user = {id:"all",name:"all"};
 	    var channel = {id:"all",name:"all"};
 	    var data = "";
-      var args = RegExp(/^(?:ParkerBot.)?\?chain(.*)/,'g').exec(res.message.text)[1].trim().split(" ");
+      var args = RegExp(/^(?:ParkerBot.)?\?chain(.*)/).exec(res.message.text)[1].trim().split(" ");
       if(args.length>0){
         user = getUser(args[0]);
         if(user==false){
@@ -176,18 +176,18 @@ function readHistory(robot, rid){
 
 module.exports = function (robot){
   robot.hear(/(.*)/i, function(res) {
-    if(RegExp(/^(?:ParkerBot.)?\?help/,'g').exec(res.message.text)){
+    if(RegExp(/^(?:ParkerBot.)?\?help/).exec(res.message.text)){
       res.send("```ParkerBot Help!\n    ?help                                displays this message!\n    ?chain [username|all] [channel|all]  loads a chain\n    ?[message|number]                    replys to message or gives N number random messages```");
-    }else if(CommandDataReg = RegExp(/^(?:ParkerBot.)?\?chain(.*)/,'g').exec(res.message.text)){
+    }else if(CommandDataReg = RegExp(/^(?:ParkerBot.)?\?chain(.*)/).exec(res.message.text)){
       dataUpdated = false;
       login(robot);
       createChain(res)
-    }else if(CommandDataReg = RegExp(/^(?:ParkerBot.)?\?reset/,'g').exec(res.message.text)&&res.message.user.id=="6it9h5MgB26bMF5Dc"){
+    }else if(CommandDataReg = RegExp(/^(?:ParkerBot.)?\?reset/).exec(res.message.text)&&res.message.user.id=="6it9h5MgB26bMF5Dc"){
       dataUpdated = false;
       login(robot);
       res.send("Resetting.");
   	  readHistory(robot, res.message.user.roomID);
-    }else if(CommandDataReg = RegExp(/^(?:ParkerBot.)?\?(.*)/,'g').exec(res.message.text)){
+    }else if(CommandDataReg = RegExp(/^(?:ParkerBot.)?\?(.*)/).exec(res.message.text)){
       if(chain==null){
         res.send("You must first use ?chain to create the chain.");
       }else{
